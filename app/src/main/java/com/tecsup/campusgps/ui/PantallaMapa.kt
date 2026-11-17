@@ -128,10 +128,10 @@ fun PantallaMapa(vm: MapaViewModel) {
                         text = "Latitud: ${e.posicion.latitud}  ·  Longitud: ${e.posicion.longitud}",
                         style = MaterialTheme.typography.bodySmall
                     )
-                    is UbicacionUi.Error -> Text(e.mensaje, color = MaterialTheme.colorScheme.error)
+                    is UbicacionUi.Error -> MensajeError(error = e, onReintentar = { alPulsar() })
                 }
 
-                masCercano?.let { lugar ->
+                if (estado !is UbicacionUi.Error) masCercano?.let { lugar ->
                     val metros = lugares.firstOrNull { it.lugar.id == lugar.id }?.metros
                     Text(
                         text = buildAnnotatedString {
