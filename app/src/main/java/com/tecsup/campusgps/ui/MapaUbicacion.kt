@@ -11,6 +11,8 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Circle
 import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
@@ -24,6 +26,7 @@ fun MapaUbicacion(
     seleccionado: Int?,
     masCercano: Int?,
     radio: Int? = null,
+    mostrarMiUbicacion: Boolean = false,
     modifier: Modifier = Modifier
 ) {
     val camara = rememberCameraPositionState {
@@ -42,7 +45,12 @@ fun MapaUbicacion(
         camara.animate(CameraUpdateFactory.newLatLngZoom(LatLng(lugar.latitud, lugar.longitud), 17f))
     }
 
-    GoogleMap(modifier = modifier, cameraPositionState = camara) {
+    GoogleMap(
+        modifier = modifier,
+        cameraPositionState = camara,
+        properties = MapProperties(isMyLocationEnabled = mostrarMiUbicacion),
+        uiSettings = MapUiSettings(myLocationButtonEnabled = mostrarMiUbicacion)
+    ) {
         if (estado is UbicacionUi.Lista) {
             val miPosicion = LatLng(estado.posicion.latitud, estado.posicion.longitud)
             Marker(

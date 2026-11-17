@@ -58,13 +58,13 @@ fun PantallaMapa(vm: MapaViewModel) {
         if (resultado.values.any { it }) vm.buscar() else vm.permisoDenegado()
     }
 
-    fun alPulsar() {
-        val tienePermiso = listOf(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
-        ).any { ContextCompat.checkSelfPermission(contexto, it) == PackageManager.PERMISSION_GRANTED }
+    fun tienePermisoUbicacion(): Boolean = listOf(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ).any { ContextCompat.checkSelfPermission(contexto, it) == PackageManager.PERMISSION_GRANTED }
 
-        if (tienePermiso) {
+    fun alPulsar() {
+        if (tienePermisoUbicacion()) {
             vm.buscar()
         } else {
             lanzador.launch(
@@ -94,12 +94,14 @@ fun PantallaMapa(vm: MapaViewModel) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (estado !is UbicacionUi.Error) {
+
                 MapaUbicacion(
                     estado = estado,
                     lugares = lugares,
                     seleccionado = seleccionado,
                     masCercano = masCercano?.id,
                     radio = radioSeleccionado,
+                    mostrarMiUbicacion = tienePermisoUbicacion(),
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
