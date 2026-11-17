@@ -29,11 +29,13 @@ import com.tecsup.campusgps.model.LugarConDistancia
 import com.tecsup.campusgps.util.formatearDistancia
 
 private val ColorPuntoLugar = Color(0xFF1E88E5)
+private val ColorPuntoCercano = Color(0xFF34A853)
 
 @Composable
 fun ListaLugares(
     lugares: List<LugarConDistancia>,
     seleccionado: Int?,
+    masCercano: Int?,
     onClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -46,6 +48,7 @@ fun ListaLugares(
             TarjetaLugar(
                 item = item,
                 seleccionada = item.lugar.id == seleccionado,
+                esMasCercano = item.lugar.id == masCercano,
                 onClick = { onClick(item.lugar.id) }
             )
         }
@@ -56,6 +59,7 @@ fun ListaLugares(
 private fun TarjetaLugar(
     item: LugarConDistancia,
     seleccionada: Boolean,
+    esMasCercano: Boolean,
     onClick: () -> Unit
 ) {
     Card(
@@ -76,7 +80,10 @@ private fun TarjetaLugar(
             Box(
                 modifier = Modifier
                     .size(10.dp)
-                    .background(ColorPuntoLugar, CircleShape)
+                    .background(
+                        if (esMasCercano) ColorPuntoCercano else ColorPuntoLugar,
+                        CircleShape
+                    )
             )
             Spacer(Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
