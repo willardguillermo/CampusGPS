@@ -48,6 +48,8 @@ fun PantallaMapa(vm: MapaViewModel) {
     val seleccionado by vm.seleccionado.collectAsState()
     val masCercano by vm.masCercano.collectAsState()
     val categoriaSeleccionada by vm.categoriaSeleccionada.collectAsState()
+    val radioSeleccionado by vm.radioSeleccionado.collectAsState()
+    val lugaresEnRadio by vm.lugaresEnRadio.collectAsState()
 
     val contexto = LocalContext.current
     val lanzador = rememberLauncherForActivityResult(
@@ -97,6 +99,7 @@ fun PantallaMapa(vm: MapaViewModel) {
                     lugares = lugares,
                     seleccionado = seleccionado,
                     masCercano = masCercano?.id,
+                    radio = radioSeleccionado,
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f)
@@ -140,6 +143,23 @@ fun PantallaMapa(vm: MapaViewModel) {
                             )
                         }
                     }
+
+                    Spacer(Modifier.height(4.dp))
+
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
+                    ) {
+                        vm.radiosDisponibles.forEach { radio ->
+                            FilterChip(
+                                selected = radioSeleccionado == radio,
+                                onClick = { vm.seleccionarRadio(radio) },
+                                label = { Text("$radio m") }
+                            )
+                        }
+                    }
                 }
 
                 Spacer(Modifier.height(4.dp))
@@ -172,6 +192,7 @@ fun PantallaMapa(vm: MapaViewModel) {
                     lugares = lugares,
                     seleccionado = seleccionado,
                     masCercano = masCercano?.id,
+                    lugaresEnRadio = lugaresEnRadio,
                     onClick = { vm.seleccionar(it) },
                     modifier = Modifier
                         .fillMaxWidth()

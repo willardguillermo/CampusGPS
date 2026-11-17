@@ -30,12 +30,14 @@ import com.tecsup.campusgps.util.formatearDistancia
 
 private val ColorPuntoLugar = Color(0xFF1E88E5)
 private val ColorPuntoCercano = Color(0xFF34A853)
+private val ColorTextoRadio = Color(0xFF34A853)
 
 @Composable
 fun ListaLugares(
     lugares: List<LugarConDistancia>,
     seleccionado: Int?,
     masCercano: Int?,
+    lugaresEnRadio: Set<Int> = emptySet(),
     onClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,6 +51,7 @@ fun ListaLugares(
                 item = item,
                 seleccionada = item.lugar.id == seleccionado,
                 esMasCercano = item.lugar.id == masCercano,
+                estaEnRadio = item.lugar.id in lugaresEnRadio,
                 onClick = { onClick(item.lugar.id) }
             )
         }
@@ -60,6 +63,7 @@ private fun TarjetaLugar(
     item: LugarConDistancia,
     seleccionada: Boolean,
     esMasCercano: Boolean,
+    estaEnRadio: Boolean,
     onClick: () -> Unit
 ) {
     Card(
@@ -97,6 +101,14 @@ private fun TarjetaLugar(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                if (estaEnRadio) {
+                    Text(
+                        text = "Dentro del radio",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = ColorTextoRadio,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
             }
             Text(
                 text = item.metros?.let(::formatearDistancia) ?: "Sin calcular",
