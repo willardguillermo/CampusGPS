@@ -4,7 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import com.tecsup.campusgps.ui.theme.AzulLugar
+import com.tecsup.campusgps.ui.theme.AzulRadioRelleno
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
@@ -62,8 +63,8 @@ fun MapaUbicacion(
                 Circle(
                     center = miPosicion,
                     radius = radio.toDouble(),
-                    fillColor = Color(0x221E88E5),
-                    strokeColor = Color(0xFF1E88E5),
+                    fillColor = AzulRadioRelleno,
+                    strokeColor = AzulLugar,
                     strokeWidth = 2f
                 )
             }

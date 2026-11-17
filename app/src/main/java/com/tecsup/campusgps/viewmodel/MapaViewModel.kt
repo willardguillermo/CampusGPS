@@ -1,6 +1,5 @@
 package com.tecsup.campusgps.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tecsup.campusgps.data.LugaresRepository
@@ -12,7 +11,6 @@ import com.tecsup.campusgps.model.Posicion
 import com.tecsup.campusgps.model.TipoError
 import com.tecsup.campusgps.model.UbicacionUi
 import com.tecsup.campusgps.util.distanciaMetros
-import com.tecsup.campusgps.util.formatearDistancia
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -118,7 +116,6 @@ class MapaViewModel(
             .map { LugarConDistancia(it, distanciaMetros(pos, it)) }
             .sortedBy { it.metros }
         _todosLosLugares.value = ordenados
-        Log.d("CampusGPS", ordenados.joinToString { "${it.lugar.nombre}: ${it.metros?.let(::formatearDistancia)}" })
     }
 
     private fun errorDe(e: Throwable): UbicacionUi.Error = when (e) {

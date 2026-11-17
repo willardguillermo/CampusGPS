@@ -22,15 +22,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tecsup.campusgps.model.LugarConDistancia
 import com.tecsup.campusgps.util.formatearDistancia
+import com.tecsup.campusgps.ui.theme.AzulLugar
+import com.tecsup.campusgps.ui.theme.VerdeCercano
 
-private val ColorPuntoLugar = Color(0xFF1E88E5)
-private val ColorPuntoCercano = Color(0xFF34A853)
-private val ColorTextoRadio = Color(0xFF34A853)
+
 
 @Composable
 fun ListaLugares(
@@ -85,7 +84,7 @@ private fun TarjetaLugar(
                 modifier = Modifier
                     .size(10.dp)
                     .background(
-                        if (esMasCercano) ColorPuntoCercano else ColorPuntoLugar,
+                        if (esMasCercano) VerdeCercano else AzulLugar,
                         CircleShape
                     )
             )
@@ -105,7 +104,7 @@ private fun TarjetaLugar(
                     Text(
                         text = "Dentro del radio",
                         style = MaterialTheme.typography.bodySmall,
-                        color = ColorTextoRadio,
+                        color = VerdeCercano,
                         fontWeight = FontWeight.Medium
                     )
                 }
