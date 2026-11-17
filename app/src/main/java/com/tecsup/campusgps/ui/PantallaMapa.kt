@@ -40,7 +40,6 @@ fun PantallaMapa(vm: MapaViewModel) {
     val lanzador = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { resultado ->
-        // Si aceptó FINE o COARSE, buscamos; si negó ambos, el ViewModel muestra el error
         if (resultado.values.any { it }) vm.buscar() else vm.permisoDenegado()
     }
 
@@ -79,7 +78,6 @@ fun PantallaMapa(vm: MapaViewModel) {
                 .padding(padding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // El mapa ocupa el espacio libre de arriba (en error se muestra solo el mensaje)
             if (estado !is UbicacionUi.Error) {
                 MapaUbicacion(
                     estado = estado,
@@ -94,7 +92,7 @@ fun PantallaMapa(vm: MapaViewModel) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
@@ -104,17 +102,28 @@ fun PantallaMapa(vm: MapaViewModel) {
                     Text("Obtener mi ubicación")
                 }
 
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(8.dp))
 
                 when (val e = estado) {
                     UbicacionUi.Inicial -> Text("Pulsa el botón para empezar")
                     UbicacionUi.Buscando -> CircularProgressIndicator()
-                    is UbicacionUi.Lista -> {
-                        Text("Latitud: ${e.posicion.latitud}")
-                        Text("Longitud: ${e.posicion.longitud}")
-                    }
+                    is UbicacionUi.Lista -> Text(
+                        text = "Latitud: ${e.posicion.latitud}  ·  Longitud: ${e.posicion.longitud}",
+                        style = MaterialTheme.typography.bodySmall
+                    )
                     is UbicacionUi.Error -> Text(e.mensaje, color = MaterialTheme.colorScheme.error)
                 }
+            }
+
+            if (estado !is UbicacionUi.Error) {
+                ListaLugares(
+                    lugares = lugares,
+                    seleccionado = seleccionado,
+                    onClick = { vm.seleccionar(it) },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                )
             }
         }
     }
