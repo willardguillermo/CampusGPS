@@ -3,13 +3,14 @@ package com.tecsup.campusgps.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.key
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.tecsup.campusgps.ui.theme.AzulLugar
-import com.tecsup.campusgps.ui.theme.AzulRadioRelleno
+import androidx.compose.ui.platform.LocalContext
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.maps.android.compose.Circle
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
@@ -17,8 +18,11 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
+import com.tecsup.campusgps.R
 import com.tecsup.campusgps.model.LugarConDistancia
 import com.tecsup.campusgps.model.UbicacionUi
+import com.tecsup.campusgps.ui.theme.AzulLugar
+import com.tecsup.campusgps.ui.theme.AzulRadioRelleno
 
 @Composable
 fun MapaUbicacion(
@@ -28,8 +32,15 @@ fun MapaUbicacion(
     masCercano: Int?,
     radio: Int? = null,
     mostrarMiUbicacion: Boolean = false,
+    modoOscuro: Boolean = false,
     modifier: Modifier = Modifier
 ) {
+    val contexto = LocalContext.current
+
+    val estiloMapa = remember(modoOscuro) {
+        if (modoOscuro) MapStyleOptions.loadRawResourceStyle(contexto, R.raw.mapa_oscuro) else null
+    }
+
     val camara = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(LatLng(-12.0464, -77.0428), 12f)
     }
@@ -49,7 +60,10 @@ fun MapaUbicacion(
     GoogleMap(
         modifier = modifier,
         cameraPositionState = camara,
-        properties = MapProperties(isMyLocationEnabled = mostrarMiUbicacion),
+        properties = MapProperties(
+            isMyLocationEnabled = mostrarMiUbicacion,
+            mapStyleOptions = estiloMapa
+        ),
         uiSettings = MapUiSettings(myLocationButtonEnabled = mostrarMiUbicacion)
     ) {
         if (estado is UbicacionUi.Lista) {
