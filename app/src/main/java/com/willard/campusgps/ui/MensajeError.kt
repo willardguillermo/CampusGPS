@@ -1,4 +1,4 @@
-package com.tecsup.campusgps.ui
+package com.willard.campusgps.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.tecsup.campusgps.model.TipoError
-import com.tecsup.campusgps.model.UbicacionUi
+import com.willard.campusgps.model.TipoError
+import com.willard.campusgps.model.UbicacionUi
 
 @Composable
 fun MensajeError(

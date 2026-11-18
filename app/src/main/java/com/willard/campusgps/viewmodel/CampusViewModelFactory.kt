@@ -1,10 +1,10 @@
-package com.tecsup.campusgps.viewmodel
+package com.willard.campusgps.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.tecsup.campusgps.data.LugaresRepositoryLocal
-import com.tecsup.campusgps.data.UbicacionRepositoryGoogle
+import com.willard.campusgps.data.LugaresRepositoryLocal
+import com.willard.campusgps.data.UbicacionRepositoryGoogle
 
 // El Context se queda aquí: el ViewModel solo recibe las interfaces.
 class CampusViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

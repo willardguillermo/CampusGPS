@@ -1,6 +1,6 @@
-package com.tecsup.campusgps.data
+package com.willard.campusgps.data
 
-import com.tecsup.campusgps.model.Lugar
+import com.willard.campusgps.model.Lugar
 
 // Datos ficticios: los 5 lugares del campus (cerca de -12.0464, -77.0428)
 class LugaresRepositoryLocal : LugaresRepository {

@@ -13,7 +13,7 @@ App Android que obtiene la ubicación del celular, la muestra en un mapa de Goog
 
 ## Cómo ejecutarlo
 1. Clona el repositorio y ábrelo en Android Studio.
-2. En Google Cloud habilita **Maps SDK for Android**, crea una clave de API y restríngela al paquete `com.tecsup.campusgps` y a tu huella SHA-1 (`./gradlew signingReport`).
+2. En Google Cloud habilita **Maps SDK for Android**, crea una clave de API y restríngela al paquete `com.willard.campusgps` y a tu huella SHA-1 (`./gradlew signingReport`).
 3. Agrega la clave en `local.properties` (este archivo no se sube a GitHub):
    ```
    MAPS_API_KEY=tu_clave
@@ -22,7 +22,7 @@ App Android que obtiene la ubicación del celular, la muestra en un mapa de Goog
 
 ## Estructura de paquetes
 ```
-com.tecsup.campusgps/
+com.willard.campusgps/
 ├── MainActivity.kt
 ├── model/
 │   └── Modelos.kt                      Posicion, Lugar, LugarConDistancia, TipoError, UbicacionUi

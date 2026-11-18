@@ -1,6 +1,6 @@
-package com.tecsup.campusgps.data
+package com.willard.campusgps.data
 
-import com.tecsup.campusgps.model.Posicion
+import com.willard.campusgps.model.Posicion
 
 interface UbicacionRepository {
     suspend fun obtenerPosicion(): Result<Posicion>

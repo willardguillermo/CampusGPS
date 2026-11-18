@@ -1,4 +1,4 @@
-package com.tecsup.campusgps.data
+package com.willard.campusgps.data
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,7 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
-import com.tecsup.campusgps.model.Posicion
+import com.willard.campusgps.model.Posicion
 import kotlinx.coroutines.tasks.await
 
 class UbicacionRepositoryGoogle(context: Context) : UbicacionRepository {

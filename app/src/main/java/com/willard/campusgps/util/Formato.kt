@@ -1,4 +1,4 @@
-package com.tecsup.campusgps.util
+package com.willard.campusgps.util
 
 import java.util.Locale
 import kotlin.math.roundToInt

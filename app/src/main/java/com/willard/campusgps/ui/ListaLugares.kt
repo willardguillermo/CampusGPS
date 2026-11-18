@@ -1,4 +1,4 @@
-package com.tecsup.campusgps.ui
+package com.willard.campusgps.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.tecsup.campusgps.model.LugarConDistancia
-import com.tecsup.campusgps.util.formatearDistancia
+import com.willard.campusgps.model.LugarConDistancia
+import com.willard.campusgps.util.formatearDistancia
 
 private val ColorPuntoLugar = Color(0xFF1E88E5)
 private val ColorPuntoCercano = Color(0xFF34A853)
